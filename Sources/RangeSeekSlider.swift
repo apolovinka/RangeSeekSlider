@@ -41,6 +41,24 @@ import UIKit
         }
     }
 
+    open var enableLimit: Bool = false {
+        didSet {
+            refresh()
+        }
+    }
+
+    open var minLimitValue: CGFloat = 0.0 {
+        didSet {
+            refresh()
+        }
+    }
+
+    open var maxLimitValue: CGFloat = 100.0 {
+        didSet {
+            refresh()
+        }
+    }
+
     /// The maximum possible value to select in the range
     @IBInspectable open var maxValue: CGFloat = 100.0 {
         didSet {
@@ -662,6 +680,11 @@ import UIKit
         }
         if selectedMaxValue > maxValue {
             selectedMaxValue = maxValue
+        }
+
+        if self.enableLimit {
+            selectedMinValue = max(selectedMinValue, self.minLimitValue)
+            selectedMaxValue = min(selectedMaxValue, self.maxLimitValue)
         }
 
         // update the frames in a transaction so that the tracking doesn't continue until the frame has moved.
