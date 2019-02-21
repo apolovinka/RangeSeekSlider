@@ -34,12 +34,6 @@ import UIKit
 
     open weak var delegate: RangeSeekSliderDelegate?
 
-    /// The minimum possible value to select in the range
-    @IBInspectable open var minValue: CGFloat = 0.0 {
-        didSet {
-            refresh()
-        }
-    }
 
     open var enableLimit: Bool = false {
         didSet {
@@ -54,6 +48,19 @@ import UIKit
     }
 
     open var maxLimitValue: CGFloat = 100.0 {
+        didSet {
+            refresh()
+        }
+    }
+
+    open var sidePadding: CGFloat = 16.0 {
+        didSet {
+            refresh()
+        }
+    }
+
+    /// The minimum possible value to select in the range
+    @IBInspectable open var minValue: CGFloat = 0.0 {
         didSet {
             refresh()
         }
@@ -476,8 +483,15 @@ import UIKit
         return sliderLine.frame.minX + offset
     }
 
+    open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if self.leftHandle.frame.contains(point) || self.rightHandle.frame.contains(point) {
+            return self
+        }
+        return super.hitTest(point, with: event)
+    }
+
     private func updateLineHeight() {
-        let barSidePadding: CGFloat = 16.0
+        let barSidePadding: CGFloat = self.sidePadding
         let yMiddle: CGFloat = frame.height / 2.0
         let lineLeftSide: CGPoint = CGPoint(x: barSidePadding, y: yMiddle)
         let lineRightSide: CGPoint = CGPoint(x: frame.width - barSidePadding,

@@ -24,9 +24,9 @@ final class ViewController: UIViewController {
     private func setup() {
         // standard range slider
         rangeSlider.delegate = self
-        rangeSlider.enableLimit = true
-        rangeSlider.minLimitValue = 10
-        rangeSlider.maxLimitValue = 90
+//        rangeSlider.enableLimit = true
+//        rangeSlider.minLimitValue = 10
+//        rangeSlider.maxLimitValue = 90
 
         // currency range slider
         rangeSliderCurrency.delegate = self
