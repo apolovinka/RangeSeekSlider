@@ -321,7 +321,7 @@ import UIKit
 
     open override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         let touchLocation: CGPoint = touch.location(in: self)
-        let insetExpansion: CGFloat = -30.0
+        let insetExpansion: CGFloat = -self.frame.width/2
         let isTouchingLeftHandle: Bool = leftHandle.frame.insetBy(dx: insetExpansion, dy: insetExpansion).contains(touchLocation)
         let isTouchingRightHandle: Bool = rightHandle.frame.insetBy(dx: insetExpansion, dy: insetExpansion).contains(touchLocation)
 
